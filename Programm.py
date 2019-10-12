@@ -19,6 +19,21 @@ def openFile():
     except:
         print("No file exists")
 
+def tabs(TableMargin, tree):
+
+
+    scrollbary.config(command=tree.yview)
+    scrollbary.pack(side=RIGHT, fill=Y)
+    scrollbarx.config(command=tree.xview)
+    scrollbarx.pack(side=BOTTOM, fill=X)
+    tree.heading('Firstname', text="Firstname", anchor=W)
+    tree.heading('Lastname', text="Lastname", anchor=W)
+    tree.heading('Address', text="Address", anchor=W)
+    tree.column('#0', stretch=NO, minwidth=0, width=0)
+    tree.column('#1', stretch=NO, minwidth=0, width=200)
+    tree.column('#2', stretch=NO, minwidth=0, width=200)
+    tree.column('#3', stretch=NO, minwidth=0, width=300)
+    tree.pack()
 
 window = Tk()
 window.title("Programm")
@@ -53,32 +68,28 @@ tab3 = ttk.Frame(tab_control)
 tab_control.add(tab1, text='Отображение исходного файла')
 tab_control.add(tab2, text='Отображение обработанного файла')
 tab_control.add(tab3, text='Какая-то статистика с графиками')
-lbl1 = Label(tab1, text='Вкладка 1')
-lbl1.grid(column=0, row=0)
-lbl2 = Label(tab2, text='Вкладка 2')
-lbl2.grid(column=0, row=0)
-lbl3 = Label(tab3, text='Вкладка 3')
-lbl3.grid(column=0, row=0)
-tab_control.pack(expand=1, fill='both')
 
-TableMargin = Frame(window, width=500)
+TableMargin = Frame(tab1, width=500)
 TableMargin.pack(side=TOP)
 scrollbarx = Scrollbar(TableMargin, orient=HORIZONTAL)
 scrollbary = Scrollbar(TableMargin, orient=VERTICAL)
 tree = ttk.Treeview(TableMargin, columns=("Firstname", "Lastname", "Address"), height=400, selectmode="extended",
                     yscrollcommand=scrollbary.set, xscrollcommand=scrollbarx.set)
-scrollbary.config(command=tree.yview)
-scrollbary.pack(side=RIGHT, fill=Y)
-scrollbarx.config(command=tree.xview)
-scrollbarx.pack(side=BOTTOM, fill=X)
-tree.heading('Firstname', text="Firstname", anchor=W)
-tree.heading('Lastname', text="Lastname", anchor=W)
-tree.heading('Address', text="Address", anchor=W)
-tree.column('#0', stretch=NO, minwidth=0, width=0)
-tree.column('#1', stretch=NO, minwidth=0, width=200)
-tree.column('#2', stretch=NO, minwidth=0, width=200)
-tree.column('#3', stretch=NO, minwidth=0, width=300)
-tree.pack()
+tabs(TableMargin, tree)
+
+TableMargin2 = Frame(tab2, width=500)
+TableMargin2.pack(side=TOP)
+scrollbarx = Scrollbar(TableMargin2, orient=HORIZONTAL)
+scrollbary = Scrollbar(TableMargin2, orient=VERTICAL)
+tree2 = ttk.Treeview(TableMargin2, columns=("Firstname", "Lastname", "Address"), height=400, selectmode="extended",
+                    yscrollcommand=scrollbary.set, xscrollcommand=scrollbarx.set)
+tabs(TableMargin2, tree2)
+
+lbl3 = Label(tab3, text='Вкладка 3')
+lbl3.grid(column=0, row=0)
+tab_control.pack(expand=1, fill='both')
+
+
 
 #============================INITIALIZATION==============================
 if __name__ == '__main__':
